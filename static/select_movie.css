@@ -1,0 +1,116 @@
+/* Reset and base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('/static/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: #f1f1f1;
+    padding: 50px 20px;
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    color: #030202;
+    margin-bottom: 40px;
+    font-size: 2.9rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Form container */
+form {
+    background-color: rgba(0, 0, 0, 0.7);
+    max-width: 600px;
+    margin: auto;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+/* Label */
+label {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    display: block;
+    color: #f1f1f1;
+}
+/* Ensure Select2 fits inside the form */
+.select2-container {
+    width: 100% !important;
+    max-width: 100%;
+}
+
+/* Select2 dropdown */
+.select2-container--default .select2-selection--single {
+    height: 44px;
+    background-color: #1c1c1c;
+    border: 1px solid #d32f2f;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #f1f1f1;
+    line-height: 36px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 36px;
+    right: 10px;
+}
+
+.select2-dropdown {
+    background-color: #070303;
+    color: #020000;
+}
+
+.select2-results__option--highlighted {
+    background-color: #d32f2f;
+    color: white;
+}
+
+/* Button styling */
+button {
+    background-color: #070404;
+    color: #d32f2f;
+    font-size: 18px;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #f5ecec;
+    color: #080808;
+    transform: translateY(-2px);
+}
+
+button:active {
+    background-color: #c62828;
+    transform: translateY(1px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    form {
+        padding: 30px 20px;
+    }
+}

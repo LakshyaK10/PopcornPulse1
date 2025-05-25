@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genre-based Recommendations</title>
+    <link rel="stylesheet" href="static/movie_recommendation.css">
+</head>
+<body>
+
+<h1>Since you watched:<br/> {{ input_movie }}</h1>
+<form class="filter-form" action="{{ url_for('recommend_by_movie') }}" method="POST">
+    <input type="hidden" name="movie" value="{{ input_movie }}">
+    <input type="hidden" name="page" value="{{ page }}">
+    <input type="hidden" name="filter" value="{% if filter == 'rating' %}year{% else %}rating{% endif %}">
+
+    <button type="submit">
+        Sorted by: {% if filter == 'year' %}Year{% else %}Rating{% endif %}
+    </button>
+</form>
+
+{% if recommendations %}
+<ul>
+    {% for movie in recommendations %}
+        <li>
+            <strong>{{ movie['title'] }}</strong><br>
+            Genre: {{ movie['genres'] }}<br>
+            Rating: {% if movie['rating'] is not none %} {{ movie['rating'] }} {% else %} N/A {% endif %}<br>
+        </li><br/>
+    {% endfor %}
+    </ul>
+    
+
+    
+    <div class="pagination">
+        {% if page > 1 %}
+            <form action="{{ url_for('recommend_by_movie') }}" method="POST" class="pagination-form">
+                <input type="hidden" name="movie" value="{{ input_movie }}">
+                <input type="hidden" name="page" value="{{ page - 1 }}">
+                <input type="hidden" name="filter" value="{{ filter }}">
+                <button type="submit">Previous Page</button>
+            </form>
+        {% endif %}
+    
+        {% if has_more %}
+            <form action="{{ url_for('recommend_by_movie') }}" method="POST" class="pagination-form">
+                <input type="hidden" name="movie" value="{{ input_movie }}">
+                <input type="hidden" name="page" value="{{ page + 1 }}">
+                <input type="hidden" name="filter" value="{{ filter }}">
+                <button type="submit">Next Page</button>
+            </form>
+        {% endif %}
+    </div>
+    
+
+    
+    <a href="{{ url_for('index') }}">← Back to Home</a>
+{% else %}
+    <p>No recommendations found. Try another movie title.</p>
+{% endif %}
+
+</body>
+</html>
+
+
+
+

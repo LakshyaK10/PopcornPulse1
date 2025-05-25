@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Movie</title>
+    <link rel="stylesheet" href="static/select_movie.css">
+
+    <!-- Include jQuery and Select2 CSS/JS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</head>
+<body>
+
+    <h1>Select a Movie</h1>
+
+    <form action="/recommend-by-movie" method="POST">
+        <label for="movie">Choose a Movie:</label>
+        <br/><br/>
+        <select name="movie" id="movie">
+            {% for movie in movies %}
+                <option value="{{ movie }}">{{ movie }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    <script>
+        $(document).ready(function () {
+            $('#movie').select2({
+                placeholder: "Search and select a movie",
+                allowClear: true,
+                width: 'resolve'
+            });
+    
+            // Automatically focus the search input when the dropdown opens
+            $('#movie').on('select2:open', function () {
+                setTimeout(() => {
+                    document.querySelector('.select2-container--open .select2-search__field').focus();
+                }, 0);
+            });
+        });
+    </script>
+    
+
+</body>
+</html>
+

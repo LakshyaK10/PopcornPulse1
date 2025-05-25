@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mood-based Movie Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='mood.css') }}">
+</head>
+<body>
+
+    <h2>Mood-based Assistant</h2>
+
+    <!-- Chat Messages -->
+    <div id="recommendationsContainer">
+        <div class="message bot-message">Hi! I am your ai movie assistant. How can I help you?</div>
+    </div>
+
+    <!-- Chat Input -->
+    <form id="moodForm">
+        <input type="text" id="moodInput" name="mood" placeholder="Describe your mood..." required>
+        <button type="submit" id="submitBtn">
+            <span id="arrowIcon">&#8679;</span>
+            <div id="buttonSpinner" class="spinner small" style="display: none;"></div>
+        </button>
+        
+    </form>
+    <div id="loadingSpinner" style="display: none;" class="spinner"></div>
+
+
+    <script>
+            document.getElementById('moodForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const mood = document.getElementById('moodInput').value;
+            if (!mood.trim()) return;
+
+            const container = document.getElementById('recommendationsContainer');
+
+            // Append user's message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user-message';
+            userMsg.textContent = mood;
+            container.appendChild(userMsg);
+
+            document.getElementById('moodInput').value = '';
+
+            // Get reference to the arrow icon and spinner
+            const arrowIcon = document.getElementById('arrowIcon');
+            const buttonSpinner = document.getElementById('buttonSpinner');
+            
+            // Show spinner and hide the arrow
+            arrowIcon.style.display = 'none';
+            buttonSpinner.style.display = 'block';
+            
+            // Disable the button to prevent multiple submissions
+            document.getElementById('submitBtn').disabled = true;
+
+            // Fetch recommendations
+            const response = await fetch('/get_mood_recommendations', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ mood })
+            });
+
+            const data = await response.json();
+
+            // Hide spinner and show the arrow again
+            buttonSpinner.style.display = 'none';
+            arrowIcon.style.display = 'inline';
+            
+            // Enable the button again
+            document.getElementById('submitBtn').disabled = false;
+
+            // Display recommendations or message if no recommendations found
+            // Display recommendations or mood message
+            if (data.type === "recommendations" && data.data.length > 0) {
+                data.data.forEach(movie => {
+                    const botMsg = document.createElement('div');
+                    botMsg.className = 'message bot-message';
+                    botMsg.innerHTML = `<strong>${movie.title}</strong> (${movie.genre}) - IMDb: ${movie.rating}<br>${movie.description}`;
+                    container.appendChild(botMsg);
+                });
+            } else if (data.type === "mood") {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'message bot-message';
+                botMsg.textContent = data.message;
+                container.appendChild(botMsg);
+            } else {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'message bot-message';
+                botMsg.textContent = 'No recommendations found.';
+                container.appendChild(botMsg);
+            }
+
+
+            // Scroll to the bottom
+            container.scrollTop = container.scrollHeight;
+        });
+
+    </script>
+    
+
+</body>
+</html>

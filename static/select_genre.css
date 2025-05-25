@@ -1,0 +1,108 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('/static/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: #f1f1f1;
+    padding: 50px 20px;
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 40px;
+    font-size: 2.9rem;
+}
+
+/* Form styling */
+form {
+    background-color: rgba(0, 0, 0, 0.7);
+    max-width: 500px;
+    margin: auto;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.429);
+    text-align: center;
+    height: 275px;
+}
+
+/* Label styling */
+label {
+    font-size: 1.2rem;
+    color: #f1f1f1;
+}
+
+/* Select dropdown */
+select {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #d32f2f;
+    border-radius: 8px;
+    background-color: #1c1c1c;
+    color: #f1f1f1;
+    appearance: none; /* Optional for consistent cross-browser styling */
+    position: relative;
+    z-index: 2;
+    outline: none; /* Optional, removes the outline on focus */
+}
+
+/* Ensure container has enough height for dropdown to expand downward */
+form {
+    position: relative;
+    z-index: 0;
+    overflow: visible;
+}
+
+/* Button styling */
+button {
+    background-color: #f5ebeb;
+    color: #d32f2f;
+    font-size: 19px;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #f5ecec;
+    color: #080808;
+    transform: translateY(-2px);
+    
+}
+
+button:active {
+    background-color: #c62828;
+    transform: translateY(1px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    form {
+        padding: 30px 20px;
+    }
+}
+
+
+

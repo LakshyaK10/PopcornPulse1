@@ -1,0 +1,144 @@
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('/static/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: #f1f1f1;
+    padding: 50px 20px;
+}
+
+.container {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7); 
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    color: #0b0303; 
+    margin-bottom: 40px; 
+    font-size: 3.9rem; 
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding-top: 30px; 
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #f8f3f3cb; 
+    color: #080505; 
+    font-size: 19px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 420px;
+}
+
+button:hover {
+    background-color: #060404; 
+    color: #ae2525; 
+    transform: translateY(-3px);
+}
+
+button:active {
+    background-color: #c62828; 
+    transform: translateY(1px);
+}
+.recommend-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; 
+    margin-bottom: 40px;
+}
+
+.recommend-buttons form {
+    margin: 0; 
+}
+
+.mood {
+    display: flex;
+    align-items: center;
+    background-color: #030101; 
+    border-radius: 15px;
+    padding: 10px;
+    max-width: 1000px; 
+    width: 100%;
+    margin: 20px auto; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mood label {
+    display: none; 
+}
+
+.mood input {
+    flex: 1; 
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    background-color: #0f0d0d;
+    color: #9e9797;
+}
+.mood input:hover{
+    font-size: 16px;
+    color: #f9f6f6;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 2rem;
+        padding-top: 20px;
+    }
+
+    form {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    form button {
+        width: 100%;
+    }
+    .mood {
+        padding: 10px;
+        flex-direction: row;
+    }
+
+    .mood input {
+        margin-bottom: 0;
+    }
+
+    .mood button {
+        width: 45px;
+        margin-left: 10px;
+    }
+}
+

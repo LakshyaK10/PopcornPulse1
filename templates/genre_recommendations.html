@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genre-based Recommendations</title>
+    <link rel="stylesheet" href="static/genre_recommendation.css">
+</head>
+<body>
+<br/>
+<h1>Recommended Movies for Genre: <br/>{{ genre }}</h1>
+
+<!-- Filter form for Rating or Year -->
+<!-- Filter form for Rating or Year -->
+<form class="filter-form" action="{{ url_for('recommend_by_genre') }}" method="POST">
+    <input type="hidden" name="genre" value="{{ genre }}">
+    <input type="hidden" name="page" value="{{ page }}">
+    <input type="hidden" name="filter" value="{% if filter == 'rating' %}year{% else %}rating{% endif %}">
+
+    <button type="submit">
+        Sorted by: {% if filter == 'year' %}Year{% else %}Rating{% endif %}
+    </button>
+</form>
+
+
+<ul>
+    {% for movie in recommendations %}
+    <li>
+        <strong>{{ movie['title'] }}</strong><br>
+        Genre: {{ movie['genres'] }}<br>
+        Rating: {% if movie['avg_rating'] %} {{ movie['avg_rating'] | round(1) }} {% else %} N/A {% endif %}<br>
+    </li><br/>
+    {% endfor %}
+</ul>
+
+<!-- Pagination buttons -->
+<!-- Pagination buttons -->
+<div class="pagination">
+    {% if page > 1 %}
+        <form action="{{ url_for('recommend_by_genre') }}" method="POST">
+            <input type="hidden" name="genre" value="{{ genre }}">
+            <input type="hidden" name="page" value="{{ page - 1 }}">
+            <input type="hidden" name="filter" value="{{ filter }}">
+            <button type="submit">Previous Page</button>
+        </form>
+    {% endif %}
+
+    {% if has_more %}
+        <form action="{{ url_for('recommend_by_genre') }}" method="POST">
+            <input type="hidden" name="genre" value="{{ genre }}">
+            <input type="hidden" name="page" value="{{ page + 1 }}">
+            <input type="hidden" name="filter" value="{{ filter }}">
+            <button type="submit">Next Page</button>
+        </form>
+    {% endif %}
+</div>
+
+
+<a href="{{ url_for('index') }}">← Back to Home</a>
+
+</body>
+</html>
+
+
+

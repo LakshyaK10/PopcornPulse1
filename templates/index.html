@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Movie Recommendation System</title>
+        <link rel="stylesheet" href="static/style.css">  <!-- Adjust path as needed -->
+    </head>
+<body>
+
+    <br/>
+    <h1>Welcome to the Movie Recommendation System</h1>
+    <br/><br/>
+    <div class="recommend-buttons">
+        <!-- Genre-based Recommendation Form -->
+        <form action="/recommend-by-genre" method="GET">
+            <button type="submit">Get Genre-based Recommendations</button>
+        </form>
+    
+        <!-- Movie-based Recommendation Form -->
+        <form action="/recommend-by-movie" method="GET">
+            <button type="submit">Get Recommendations Based on a Movie</button>
+        </form>
+    </div>
+    
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+
+<form action="/no" method="get">
+    <div class="mood">
+        <input type="submit" value="Mood-based AI Assistant" />
+    </div>
+</form>
+
+    <!-- Mood-based Recommendation Section -->
+    <!-- <form id="moodForm">
+        <div class="mood">
+            <input type="text" id="moodInput" name="mood" placeholder="How are you feeling..." required>
+            <button type="submit"><span>&#8679;</span></button>
+        </div>
+    </form>
+    
+    
+    <div id="recommendationsContainer"></div>    
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById('moodForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const moodInput = document.getElementById('moodInput').value;
+
+        const response = await fetch('/get_recommendations', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ mood: moodInput })
+        });
+
+        const data = await response.json();
+
+        console.log("API Response:", data);  
+
+        const container = document.getElementById('recommendationsContainer');
+        container.innerHTML = ''; 
+
+        if (data.recommendations && data.recommendations.length > 0) {
+            const list = document.createElement('ul');
+            data.recommendations.forEach(movie => {
+                const item = document.createElement('li');
+                item.innerHTML = `<strong>${movie.title}</strong> (${movie.genre}) - IMDb: ${movie.rating}<br>${movie.description}`;
+                list.appendChild(item);
+            });
+            container.appendChild(list);
+        } else {
+            container.textContent = 'No recommendations found.';
+        }
+    });
+});
+
+        </script>
+         -->
+</body>
+</html>
+
+

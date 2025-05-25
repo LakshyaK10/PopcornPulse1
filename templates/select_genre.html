@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Genre</title>
+    <link rel="stylesheet" href="static/select_genre.css">
+</head>
+<body>
+
+    <h1>Select a Genre</h1>
+
+    <form action="/recommend-by-genre" method="POST" onsubmit="return validateForm()">
+        <label for="genre">Choose a Genre:</label>
+        <br/><br/><br/>
+    
+        <select name="genre" id="genre">
+            {% for genre in genres %}
+                <option value="{{ genre }}">{{ genre }}</option>
+            {% endfor %}
+        </select>
+        <br/><br/><br/>
+        <button type="submit">Get Recommendations</button>
+    </form>
+    
+    <script>
+        function validateForm() {
+            const selectedGenre = document.getElementById("genre").value;
+            if (selectedGenre.toLowerCase().includes("no genres listed")) {
+                alert("Please select a valid genre.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+    
+
+</body>
+</html>
