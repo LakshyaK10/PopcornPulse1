@@ -1,4 +1,3 @@
-/* Reset and base styles */
 * {
     margin: 0;
     padding: 0;
@@ -16,7 +15,7 @@ body {
     padding: 50px 20px;
 }
 
-/* Heading */
+
 h1 {
     text-align: center;
     color: #000000;
@@ -24,7 +23,7 @@ h1 {
     font-size: 2.9rem;
 }
 
-/* Form styling */
+
 form {
     background-color: rgba(0, 0, 0, 0.7);
     max-width: 500px;
@@ -36,13 +35,13 @@ form {
     height: 275px;
 }
 
-/* Label styling */
+
 label {
     font-size: 1.2rem;
     color: #f1f1f1;
 }
 
-/* Select dropdown */
+
 select {
     width: 100%;
     max-width: 400px;
@@ -52,13 +51,12 @@ select {
     border-radius: 8px;
     background-color: #1c1c1c;
     color: #f1f1f1;
-    appearance: none; /* Optional for consistent cross-browser styling */
+    appearance: none; 
     position: relative;
     z-index: 2;
-    outline: none; /* Optional, removes the outline on focus */
+    outline: none; 
 }
 
-/* Ensure container has enough height for dropdown to expand downward */
 form {
     position: relative;
     z-index: 0;
@@ -88,7 +86,14 @@ button:active {
     background-color: #c62828;
     transform: translateY(1px);
 }
-
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    top: 0;
+    left: 0;
+  }
 /* Responsive design */
 @media (max-width: 768px) {
     body {
