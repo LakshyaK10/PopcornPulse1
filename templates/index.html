@@ -1,86 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Movie Recommendation System</title>
-        <link rel="stylesheet" href="static/style.css">  <!-- Adjust path as needed -->
-    </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Movie Recommendation System</title>
+
+  <!-- Fonts and Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="static/style.css">
+
+  <!-- Lottie -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</head>
+
 <body>
+  <!-- Preloader -->
+  <div id="preloader"><div class="spinner"></div></div>
 
-    <br/>
-    <h1>Welcome to the Movie Recommendation System</h1>
-    <br/><br/>
-    <div class="recommend-buttons">
-        <!-- Genre-based Recommendation Form -->
-        <form action="/recommend-by-genre" method="GET">
-            <button type="submit">Get Genre-based Recommendations</button>
-        </form>
-    
-        <!-- Movie-based Recommendation Form -->
-        <form action="/recommend-by-movie" method="GET">
-            <button type="submit">Get Recommendations Based on a Movie</button>
-        </form>
+  <!-- Background Animation -->
+  <lottie-player
+    src="https://assets1.lottiefiles.com/packages/lf20_jzjvwlcy.json"
+    background="transparent"
+    speed="1"
+    style="position:fixed; width:100%; height:100%; z-index:-2;"
+    loop
+    autoplay>
+  </lottie-player>
+  <div id="particles-js"></div>
+
+  <!-- Welcome Card -->
+  <div class="welcome-card">
+    <h1>🎜️ Welcome to <br> PopcornPulse</h1>
+    <p>Discover movies based on your mood, favorite genres, or last watched film. Let AI help you find your next binge!</p>
+  </div>
+
+  <!-- Trending Carousel -->
+  <section class="carousel-section">
+    <h2>Trending Movies</h2>
+    <div class="carousel-wrapper">
+      <button class="carousel-arrow left" id="carousel-left">&#8249;</button>
+      <div class="carousel-container" id="trending-carousel"></div>
+      <button class="carousel-arrow right" id="carousel-right">&#8250;</button>
     </div>
-    
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+  </section>
 
-
-<form action="/no" method="get">
-    <div class="mood">
-        <input type="submit" value="Mood-based AI Assistant" />
-    </div>
-</form>
-
-    <!-- Mood-based Recommendation Section -->
-    <!-- <form id="moodForm">
-        <div class="mood">
-            <input type="text" id="moodInput" name="mood" placeholder="How are you feeling..." required>
-            <button type="submit"><span>&#8679;</span></button>
-        </div>
+  <!-- Recommendation Buttons -->
+  <div class="recommend-buttons fade-in-bottom">
+    <form action="/recommend-by-genre" method="GET">
+      <button type="submit"><i class="fas fa-film"></i> Genre-based Recommendations</button>
     </form>
-    
-    
-    <div id="recommendationsContainer"></div>    
+    <form action="/recommend-by-movie" method="GET">
+      <button type="submit"><i class="fas fa-star"></i> Movie-based Recommendations</button>
+    </form>
+  </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById('moodForm').addEventListener('submit', async function (e) {
-        e.preventDefault();
-        const moodInput = document.getElementById('moodInput').value;
+  <!-- AI Assistant -->
+  <form action="/no" method="get">
+    <div class="mood">
+      <input type="submit" value="Mood-based AI Assistant" />
+    </div>
+  </form>
 
-        const response = await fetch('/get_recommendations', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ mood: moodInput })
-        });
+  <!-- Trailer Modal -->
+  <div id="trailer-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeTrailer()">&times;</span>
+      <iframe id="trailer-frame" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
 
-        const data = await response.json();
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Made by Lakshya Khamesra</p>
+    <div class="social-icons">
+      <a href="https://github.com/yourgithub" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/yourlinkedin" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="mailto:youremail@example.com"><i class="fas fa-envelope"></i></a>
+    </div>
+  </footer>
 
-        console.log("API Response:", data);  
-
-        const container = document.getElementById('recommendationsContainer');
-        container.innerHTML = ''; 
-
-        if (data.recommendations && data.recommendations.length > 0) {
-            const list = document.createElement('ul');
-            data.recommendations.forEach(movie => {
-                const item = document.createElement('li');
-                item.innerHTML = `<strong>${movie.title}</strong> (${movie.genre}) - IMDb: ${movie.rating}<br>${movie.description}`;
-                list.appendChild(item);
-            });
-            container.appendChild(list);
-        } else {
-            container.textContent = 'No recommendations found.';
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <script>
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 60 },
+        size: { value: 3 },
+        move: { speed: 1.5 },
+        line_linked: { enable: true, color: "#ffffff" }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          resize: true
+        },
+        modes: {
+          repulse: { distance: 150, duration: 0.5 }
         }
+      },
+      retina_detect: true
     });
-});
 
-        </script>
-         -->
+    window.addEventListener("load", () => {
+      document.getElementById("preloader").style.display = "none";
+    });
+
+    function openTrailer(videoKey) {
+      const trailerModal = document.getElementById("trailer-modal");
+      const trailerFrame = document.getElementById("trailer-frame");
+      trailerFrame.src = `https://www.youtube.com/embed/${videoKey}?autoplay=1`;
+      trailerModal.style.display = "flex";
+    }
+
+    function closeTrailer() {
+      const trailerModal = document.getElementById("trailer-modal");
+      const trailerFrame = document.getElementById("trailer-frame");
+      trailerModal.style.display = "none";
+      trailerFrame.src = "";
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const apiKey = "757b4ed56ee070fd130378c2b584cb9d";
+      const trendingContainer = document.getElementById("trending-carousel");
+
+      function fetchTrending() {
+        fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`)
+          .then(response => response.json())
+          .then(data => {
+            trendingContainer.innerHTML = "";
+            data.results.slice(0, 10).forEach(movie => {
+              if (movie.poster_path) {
+                const item = document.createElement("div");
+                item.className = "carousel-item";
+                item.innerHTML = `
+                  <img src="https://image.tmdb.org/t/p/w300${movie.poster_path}" alt="${movie.title}" onclick="getTrailer(${movie.id})">
+                  <div class="movie-info">
+                    <h4>${movie.title}</h4>
+                    <p>⭐ ${movie.vote_average}</p>
+                  </div>`;
+                trendingContainer.appendChild(item);
+              }
+            });
+          })
+          .catch(err => console.error("TMDB fetch error:", err));
+      }
+
+      fetchTrending();
+
+      document.getElementById("carousel-left").addEventListener("click", () => {
+        trendingContainer.scrollBy({ left: -250, behavior: "smooth" });
+      });
+
+      document.getElementById("carousel-right").addEventListener("click", () => {
+        trendingContainer.scrollBy({ left: 250, behavior: "smooth" });
+      });
+
+      setInterval(() => {
+        trendingContainer.scrollBy({ left: 250, behavior: "smooth" });
+      }, 5000);
+    });
+
+    function getTrailer(movieId) {
+      const apiKey = "757b4ed56ee070fd130378c2b584cb9d";
+      fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`)
+        .then(res => res.json())
+        .then(data => {
+          const trailer = data.results.find(vid => vid.type === "Trailer" && vid.site === "YouTube");
+          if (trailer) openTrailer(trailer.key);
+          else alert("Trailer not available!");
+        })
+        .catch(err => console.error("Trailer fetch error:", err));
+    }
+  </script>
 </body>
 </html>
-
-
