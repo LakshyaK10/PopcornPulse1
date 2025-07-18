@@ -6,7 +6,7 @@
     <title>Select Movie</title>
     <link rel="stylesheet" href="static/select_movie.css">
 
-    <!-- Include jQuery and Select2 CSS/JS -->
+ 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -35,7 +35,7 @@
                 width: 'resolve'
             });
     
-            // Automatically focus the search input when the dropdown opens
+           
             $('#movie').on('select2:open', function () {
                 setTimeout(() => {
                     document.querySelector('.select2-container--open .select2-search__field').focus();
@@ -43,7 +43,40 @@
             });
         });
     </script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <div id="particles-js"></div>
+    <script>
+        particlesJS('particles-js', {
+          particles: {
+            number: { value: 60 },
+            size: { value: 3 },
+            move: { speed: 1.5 },
+            line_linked: { enable: true },
+            color: { value: "#ffffff" }
+          
+          },interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: {
+            enable: true,
+            mode: "repulse"
+          },
+          onclick: {
+            enable: false
+          },
+          resize: true
+        },
+        modes: {
+          repulse: {
+            distance: 150,  
+            duration: 0.5,
+            speed: 2
+          }
+        }
+      },
+      retina_detect: true
+        });
+        </script>
 
 </body>
 </html>
