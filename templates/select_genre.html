@@ -34,6 +34,39 @@
         }
     </script>
     
-
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <div id="particles-js"></div>
+    <script>
+        particlesJS('particles-js', {
+          particles: {
+            number: { value: 60 },
+            size: { value: 3 },
+            move: { speed: 1.5 },
+            line_linked: { enable: true },
+            color: { value: "#ffffff" }
+          
+          },interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: {
+            enable: true,
+            mode: "repulse"
+          },
+          onclick: {
+            enable: false
+          },
+          resize: true
+        },
+        modes: {
+          repulse: {
+            distance: 150,   
+            duration: 0.5,
+            speed: 2
+          }
+        }
+      },
+      retina_detect: true
+        });
+        </script>
 </body>
 </html>
