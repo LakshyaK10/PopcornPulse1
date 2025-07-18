@@ -10,8 +10,7 @@
 <br/>
 <h1>Recommended Movies for Genre: <br/>{{ genre }}</h1>
 
-<!-- Filter form for Rating or Year -->
-<!-- Filter form for Rating or Year -->
+
 <form class="filter-form" action="{{ url_for('recommend_by_genre') }}" method="POST">
     <input type="hidden" name="genre" value="{{ genre }}">
     <input type="hidden" name="page" value="{{ page }}">
@@ -33,8 +32,7 @@
     {% endfor %}
 </ul>
 
-<!-- Pagination buttons -->
-<!-- Pagination buttons -->
+
 <div class="pagination">
     {% if page > 1 %}
         <form action="{{ url_for('recommend_by_genre') }}" method="POST">
@@ -55,7 +53,40 @@
     {% endif %}
 </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+<div id="particles-js"></div>
+<script>
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 60 },
+        size: { value: 3 },
+        move: { speed: 1.5 },
+        line_linked: { enable: true },
+        color: { value: "#ffffff" }
+      
+      },interactivity: {
+    detect_on: "canvas",
+    events: {
+      onhover: {
+        enable: true,
+        mode: "repulse"
+      },
+      onclick: {
+        enable: false
+      },
+      resize: true
+    },
+    modes: {
+      repulse: {
+        distance: 150,     
+        duration: 0.5,
+        speed: 2
+      }
+    }
+  },
+  retina_detect: true
+    });
+    </script>
 <a href="{{ url_for('index') }}">← Back to Home</a>
 
 </body>
